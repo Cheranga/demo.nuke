@@ -22,4 +22,5 @@ Then follow the setup steps to get a `nuke` build to your solution.
 flowchart LR
     Clean --> Restore
     Restore --> Build
+    Build --> Test
 ```
