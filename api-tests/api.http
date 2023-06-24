@@ -1,0 +1,8 @@
+POST https://localhost:7180/api/items
+Content-Type: application/json
+
+{
+  "itemId": "666",
+  "sku": "ITEM-666",
+  "category": "gardening"
+}

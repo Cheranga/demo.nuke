@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo.Nuke.Items.Api", "src\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "_build", "build\_build.csproj", "{72EB7C25-4A8A-4418-8489-8D5AA822289B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo.Nuke.Items.Api.Tests", "tests\Demo.Nuke.Items.Api.Tests\Demo.Nuke.Items.Api.Tests.csproj", "{528923F2-5DA3-4FA4-A27C-3E333F073FF1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -16,5 +18,9 @@ Global
 		{1F18A519-2003-47FE-B355-0D7FA7484E94}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1F18A519-2003-47FE-B355-0D7FA7484E94}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1F18A519-2003-47FE-B355-0D7FA7484E94}.Release|Any CPU.Build.0 = Release|Any CPU
+		{528923F2-5DA3-4FA4-A27C-3E333F073FF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{528923F2-5DA3-4FA4-A27C-3E333F073FF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{528923F2-5DA3-4FA4-A27C-3E333F073FF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{528923F2-5DA3-4FA4-A27C-3E333F073FF1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
