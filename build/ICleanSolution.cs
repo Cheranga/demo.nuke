@@ -1,12 +1,8 @@
 using Nuke.Common;
-using Nuke.Common.ProjectModel;
 using Nuke.Common.Tools.DotNet;
 
-public interface ICleanSolution : INukeBuild
+public interface ICleanSolution : INukeComponent
 {
-    [Solution]
-    Solution Solution => TryGetValue(() => Solution);
-
     Target CleanSolution =>
         _ =>
             _.Description("Clean Solution")

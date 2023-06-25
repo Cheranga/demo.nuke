@@ -3,9 +3,6 @@ using Nuke.Common.Tools.DotNet;
 
 public interface ICompileSolution : IRestoreSolution
 {
-    [Parameter("Configuration to build - Default is 'Debug' (local) or 'Release' (server)")]
-    Configuration Configuration => TryGetValue(() => Configuration);
-
     Target CompileSolution =>
         _ =>
             _.Description("Compile")
