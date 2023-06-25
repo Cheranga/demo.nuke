@@ -24,4 +24,4 @@ jobs:
         run: dotnet tool install Nuke.GlobalTool --global
       
       - name: Nuke
-        run: nuke
+        run: nuke --target start

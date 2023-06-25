@@ -4,6 +4,7 @@ using Nuke.Common.CI.GitHubActions;
 using Nuke.Common.ProjectModel;
 using Nuke.Common.Tooling;
 using Nuke.Common.Tools.DotNet;
+using Serilog;
 
 // [GitHubActions("build", GitHubActionsImage.UbuntuLatest, OnPushBranches = new[] { "master" })]
 class Build : NukeBuild
@@ -15,6 +16,12 @@ class Build : NukeBuild
 
     [Solution(GenerateProjects = true)]
     readonly Solution Solution;
+
+    private Target Start => _ => _.Description("Start")
+        .Executes(() =>
+        {
+            Log.Information("Starting pipeline");
+        });
 
     Target DotnetToolRestore =>
         _ =>
