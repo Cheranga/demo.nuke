@@ -10,7 +10,6 @@ on:
 jobs:
   DEV:
     name: DEV
-    needs: SETUP
     uses: ./.github/workflows/ci-pipeline.yml
     with:
       environment: dev
