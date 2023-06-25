@@ -22,6 +22,11 @@ jobs:
       
       - name: Install Nuke
         run: dotnet tool install Nuke.GlobalTool --global
-      
+  DEV:
+    name: DEV
+    needs: build
+    runs-on: ubuntu-latest
+    environment: dev
+    steps:
       - name: Nuke
-        run: nuke --target start
+        run: nuke --target --Api-Key {{ env.ApiKey }} start

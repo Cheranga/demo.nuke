@@ -1,29 +1,34 @@
 using System.Linq;
+using System.Reflection.Metadata;
 using Nuke.Common;
-using Nuke.Common.CI.GitHubActions;
 using Nuke.Common.ProjectModel;
 using Nuke.Common.Tooling;
 using Nuke.Common.Tools.DotNet;
 using Serilog;
 
 // [GitHubActions("build", GitHubActionsImage.UbuntuLatest, OnPushBranches = new[] { "master" })]
-class Build : NukeBuild
+internal class Build : NukeBuild
 {
+    [Parameter("Api key")]
+    private readonly string ApiKey;
+
     [Parameter("Configuration to build - Default is 'Debug' (local) or 'Release' (server)")]
-    readonly Configuration Configuration = IsLocalBuild
+    private readonly Configuration Configuration = IsLocalBuild
         ? Configuration.Debug
         : Configuration.Release;
 
     [Solution(GenerateProjects = true)]
-    readonly Solution Solution;
+    private readonly Solution Solution;
 
-    private Target Start => _ => _.Description("Start")
-        .Executes(() =>
-        {
-            Log.Information("Starting pipeline");
-        });
+    private Target Start =>
+        _ =>
+            _.Description("Start")
+                .Executes(() =>
+                {
+                    Log.Information("{ApiKey} Starting pipeline", ApiKey);
+                });
 
-    Target DotnetToolRestore =>
+    private Target DotnetToolRestore =>
         _ =>
             _.Description("Restore DotNet Tools")
                 .Executes(() =>
@@ -31,7 +36,7 @@ class Build : NukeBuild
                     DotNetTasks.DotNetToolRestore(x => x.SetProcessWorkingDirectory(RootDirectory));
                 });
 
-    Target CodeFormatCheck =>
+    private Target CodeFormatCheck =>
         _ =>
             _.Description("Check C# Code Formatting")
                 .DependsOn(DotnetToolRestore)
@@ -40,7 +45,7 @@ class Build : NukeBuild
                     DotNetTasks.DotNet($"csharpier --check .");
                 });
 
-    Target Clean =>
+    private Target Clean =>
         _ =>
             _.Description("Clean Solution")
                 .DependsOn(CodeFormatCheck)
@@ -49,7 +54,7 @@ class Build : NukeBuild
                     DotNetTasks.DotNetClean(x => x.SetProject(Solution));
                 });
 
-    Target Restore =>
+    private Target Restore =>
         _ =>
             _.Description("Restore")
                 .DependsOn(Clean)
@@ -58,7 +63,7 @@ class Build : NukeBuild
                     DotNetTasks.DotNetRestore(x => x.SetProjectFile(Solution));
                 });
 
-    Target Compile =>
+    private Target Compile =>
         _ =>
             _.Description("Compile")
                 .DependsOn(Restore)
@@ -72,7 +77,7 @@ class Build : NukeBuild
                     );
                 });
 
-    Target Test =>
+    private Target Test =>
         _ =>
             _.Description("Run Tests")
                 .DependsOn(Compile)
