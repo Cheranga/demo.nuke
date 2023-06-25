@@ -1,0 +1,23 @@
+name: build
+
+on:
+  workflow_call:
+    inputs:      
+      environment:
+        required: true
+        type: string
+      apiKey:
+        required: true
+        type: string            
+    secrets:
+      password:
+        required: true
+
+jobs:
+  build:
+    name: build
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.environment }}
+    steps:
+      - name: Nuke
+        run: nuke --api-key "${{ inputs.apiKey }}" --password "${{ secrets.password }}" --target start      
