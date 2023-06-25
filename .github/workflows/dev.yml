@@ -19,5 +19,8 @@ jobs:
     runs-on: ubuntu-latest
     environment: ${{ inputs.environment }}
     steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        
       - name: Nuke
         run: nuke --api-key "${{ inputs.apiKey }}" --password "${{ secrets.password }}" --target start      

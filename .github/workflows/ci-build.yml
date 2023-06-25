@@ -11,9 +11,6 @@ jobs:
   SETUP:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
         with:
@@ -28,6 +25,6 @@ jobs:
     uses: ./.github/workflows/dev.yml
     with:
       environment: dev
-      apiKey: "${{ vars.APIKEY }}"
+      apiKey: ${{ vars.APIKEY }}
     secrets:
-      password: "${{ secrets.PASSWORD }}"    
+      password: ${{ secrets.PASSWORD }}    
