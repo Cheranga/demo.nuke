@@ -1,9 +1,14 @@
 using Nuke.Common;
 
-internal class Build : NukeBuild, ICheckCodeFormatting, IRunTests
+internal class Build
+    : NukeBuild,
+        ICheckCodeFormatting,
+        ICleanSolution,
+        IRestoreSolution,
+        ICompileSolution,
+        IRunTests,
+        INotifyTeam
 {
-    //private Target Test => _ => _.Description("Running Tests").TryDependsOn<IRunTests>();
-
     /// Support plugins are available for:
     /// - JetBrains ReSharper        https://nuke.build/resharper
     /// - JetBrains Rider            https://nuke.build/rider

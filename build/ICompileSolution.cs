@@ -1,7 +1,7 @@
 using Nuke.Common;
 using Nuke.Common.Tools.DotNet;
 
-public interface ICompileSolution : IRestoreSolution
+public interface ICompileSolution : INukeComponent
 {
     Target CompileSolution =>
         _ =>

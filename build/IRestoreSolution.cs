@@ -1,7 +1,7 @@
 using Nuke.Common;
 using Nuke.Common.Tools.DotNet;
 
-public interface IRestoreSolution : ICleanSolution
+public interface IRestoreSolution : INukeComponent
 {
     Target RestoreSolution =>
         _ =>

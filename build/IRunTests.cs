@@ -2,9 +2,9 @@ using System.Linq;
 using Nuke.Common;
 using Nuke.Common.Tools.DotNet;
 
-public interface IRunTests : ICompileSolution, INotifyTeam
+public interface IRunTests : INukeComponent
 {
-    Target RunTests =>
+    public Target RunTests =>
         _ =>
             _.Description("Run Tests")
                 .DependsOn<ICompileSolution>()
