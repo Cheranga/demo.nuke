@@ -15,3 +15,13 @@ jobs:
       environment: dev   
     secrets: 
       password: ${{ secrets.PASSWORD }}
+      
+  TEST:
+    name: TEST
+    needs: 
+      - DEV
+    uses: ./.github/workflows/ci-pipeline.yml
+    with:
+      environment: test
+    secrets:
+      password: ${{ secrets.PASSWORD }}      
