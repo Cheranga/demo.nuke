@@ -18,9 +18,7 @@ public record MessagePublisher : IMessagePublisher
 
     public async Task PublishAsync(RegisterItemRequest request)
     {
-        await Task
-            .Delay(TimeSpan
-                .FromSeconds(2));
+        await Task.Delay(TimeSpan.FromSeconds(2));
         _logger.LogInformation("{@Request} published", request);
     }
 }
