@@ -30,7 +30,7 @@ internal class Build : NukeBuild
                 .Executes(() =>
                 {
                     Log.Information(
-                        "Starting pipeline with {ApiKey} and {Password}",
+                        "Pipeline finished with {ApiKey} and {Password}",
                         ApiKey,
                         Password
                     );
