@@ -85,8 +85,8 @@
               "CodeFormatCheck",
               "Compile",
               "DotnetToolRestore",
+              "Notify",
               "Restore",
-              "Start",
               "Test"
             ]
           }
@@ -105,8 +105,8 @@
               "CodeFormatCheck",
               "Compile",
               "DotnetToolRestore",
+              "Notify",
               "Restore",
-              "Start",
               "Test"
             ]
           }

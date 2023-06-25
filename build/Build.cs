@@ -24,7 +24,7 @@ internal class Build : NukeBuild
     [Solution(GenerateProjects = true)]
     private readonly Solution Solution;
 
-    private Target Start =>
+    private Target Notify =>
         _ =>
             _.Description("Start")
                 .Executes(() =>
@@ -89,6 +89,7 @@ internal class Build : NukeBuild
         _ =>
             _.Description("Run Tests")
                 .DependsOn(Compile)
+                .Triggers(Notify)
                 .Executes(() =>
                 {
                     Solution.AllProjects
