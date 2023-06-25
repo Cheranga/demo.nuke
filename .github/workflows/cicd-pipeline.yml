@@ -10,10 +10,6 @@ on:
 jobs:
   DEV:
     name: DEV
-    environment: dev
     uses: ${{ github.workspace }}/ci-pipeline.yml    
     with:
-      environment: dev
-      apiKey: ${{ vars.APIKEY }}
-    secrets:
-      password: ${{ secrets.PASSWORD }}    
+      environment: dev    

@@ -6,12 +6,12 @@ on:
       environment:
         required: true
         type: string
-      apiKey:
-        required: true
-        type: string            
-    secrets:
-      password:
-        required: true
+#      apiKey:
+#        required: true
+#        type: string            
+#    secrets:
+#      password:
+#        required: true
 
 jobs:
   ci:
@@ -32,4 +32,4 @@ jobs:
         uses: actions/checkout@v3
         
       - name: Nuke
-        run: nuke --api-key "${{ inputs.apiKey }}" --password "${{ secrets.password }}" --target start      
+        run: nuke --api-key "${{ vars.APIKEY }}" --password "${{ secrets.PASSWORD }}" --target start      
