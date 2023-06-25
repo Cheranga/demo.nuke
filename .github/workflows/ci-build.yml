@@ -8,25 +8,33 @@ on:
       - '*'
 
 jobs:
-  build:
+#  build:
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: Checkout
+#        uses: actions/checkout@v3
+#        
+#      - name: Setup .NET
+#        uses: actions/setup-dotnet@v3
+#        with:
+#          dotnet-version: |
+#            7.0.x
+#      
+#      - name: Install Nuke
+#        run: dotnet tool install Nuke.GlobalTool --global
+  DEV:
+    name: DEV
     runs-on: ubuntu-latest
+    environment: dev
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-        
+
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: |
             7.0.x
-      
+
       - name: Install Nuke
         run: dotnet tool install Nuke.GlobalTool --global
-  DEV:
-    name: DEV
-    needs: build
-    runs-on: ubuntu-latest
-    environment: dev
-    steps:
-      - name: Nuke
-        run: nuke --target --Api-Key {{ env.ApiKey }} start
