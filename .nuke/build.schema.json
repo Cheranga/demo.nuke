@@ -8,7 +8,7 @@
       "properties": {
         "ApiKey": {
           "type": "string",
-          "description": "Api key"
+          "description": "Api Key"
         },
         "Configuration": {
           "type": "string",
@@ -57,7 +57,7 @@
         },
         "Password": {
           "type": "string",
-          "description": "Password",
+          "description": "Api Key",
           "default": "Secrets must be entered via 'nuke :secrets [profile]'"
         },
         "Plan": {

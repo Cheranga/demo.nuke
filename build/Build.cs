@@ -7,7 +7,7 @@ using Nuke.Common.Tools.DotNet;
 using Serilog;
 
 // [GitHubActions("build", GitHubActionsImage.UbuntuLatest, OnPushBranches = new[] { "master" })]
-internal class Build : NukeBuild
+internal class Build : NukeBuild, INotifyTeam
 {
     [Parameter("Api key")]
     private readonly string ApiKey;
@@ -23,18 +23,6 @@ internal class Build : NukeBuild
 
     [Solution(GenerateProjects = true)]
     private readonly Solution Solution;
-
-    private Target Notify =>
-        _ =>
-            _.Description("Start")
-                .Executes(() =>
-                {
-                    Log.Information(
-                        "Pipeline finished with {ApiKey} and {Password}",
-                        ApiKey,
-                        Password
-                    );
-                });
 
     private Target DotnetToolRestore =>
         _ =>
@@ -89,7 +77,7 @@ internal class Build : NukeBuild
         _ =>
             _.Description("Run Tests")
                 .DependsOn(Compile)
-                .Triggers(Notify)
+                .Triggers<INotifyTeam>()
                 .Executes(() =>
                 {
                     Solution.AllProjects
