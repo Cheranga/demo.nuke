@@ -39,4 +39,25 @@ jobs:
       - name: Install Nuke
         run: dotnet tool install Nuke.GlobalTool --global
       - name: Nuke
-        run: nuke --Api-Key ${{ vars.APIKEY }} --target start        
+        run: nuke --Api-Key ${{ vars.APIKEY }} --target start      
+          
+  TEST:
+    name: TEST
+    runs-on: ubuntu-latest
+    needs: 
+      - DEV
+    environment: test
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: |
+            7.0.x
+
+      - name: Install Nuke
+        run: dotnet tool install Nuke.GlobalTool --global
+      - name: Nuke
+        run: nuke --Api-Key ${{ vars.APIKEY }} --target start   
