@@ -95,6 +95,7 @@
               "CreateResourceGroup",
               "Init",
               "Notify",
+              "RestoreDotNetTools",
               "RestoreSolution",
               "RunTests"
             ]
@@ -120,6 +121,7 @@
               "CreateResourceGroup",
               "Init",
               "Notify",
+              "RestoreDotNetTools",
               "RestoreSolution",
               "RunTests"
             ]

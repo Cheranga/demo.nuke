@@ -11,6 +11,7 @@ using Nuke.Common;
 internal class Build
     : NukeBuild,
         ICheckCodeFormatting,
+        IRestoreDotNetTools,
         ICleanSolution,
         IRestoreSolution,
         ICompileSolution,
