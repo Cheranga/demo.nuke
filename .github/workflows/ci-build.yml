@@ -60,4 +60,4 @@ jobs:
       - name: Install Nuke
         run: dotnet tool install Nuke.GlobalTool --global
       - name: Nuke
-        run: nuke --Api-Key ${{ vars.APIKEY }} --target start   
+        run: nuke --Api-Key '${{ vars.APIKEY }}' --target start   
