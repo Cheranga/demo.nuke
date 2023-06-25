@@ -12,4 +12,6 @@ jobs:
     name: DEV
     uses: ./.github/workflows/ci-pipeline.yml    
     with:
-      environment: dev    
+      environment: dev   
+    secrets: 
+      password: ${{ secrets.PASSWORD }}
