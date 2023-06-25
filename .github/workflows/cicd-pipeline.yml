@@ -10,6 +10,6 @@ on:
 jobs:
   DEV:
     name: DEV
-    uses: ./github/workflows/ci-pipeline.yml    
+    uses: ./.github/workflows/ci-pipeline.yml    
     with:
       environment: dev    
