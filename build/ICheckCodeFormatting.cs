@@ -1,7 +1,7 @@
 using Nuke.Common;
 using Nuke.Common.Tools.DotNet;
 
-public interface ICheckCodeFormatting : IRestoreDotNetTools
+public interface ICheckCodeFormatting : INukeComponent
 {
     Target CheckCodeFormatting =>
         _ =>

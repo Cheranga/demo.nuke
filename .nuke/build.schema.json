@@ -10,6 +10,14 @@
           "type": "string",
           "description": "Api Key"
         },
+        "ClientId": {
+          "type": "string",
+          "default": "Secrets must be entered via 'nuke :secrets [profile]'"
+        },
+        "ClientSecret": {
+          "type": "string",
+          "default": "Secrets must be entered via 'nuke :secrets [profile]'"
+        },
         "Configuration": {
           "type": "string",
           "description": "Configuration to build - Default is 'Debug' (local) or 'Release' (server)",
@@ -84,8 +92,9 @@
               "CheckCodeFormatting",
               "CleanSolution",
               "CompileSolution",
+              "CreateResourceGroup",
+              "Init",
               "Notify",
-              "RestoreDotNetTools",
               "RestoreSolution",
               "RunTests"
             ]
@@ -94,6 +103,10 @@
         "Solution": {
           "type": "string",
           "description": "Path to a solution file that is automatically loaded"
+        },
+        "SubscriptionId": {
+          "type": "string",
+          "default": "Secrets must be entered via 'nuke :secrets [profile]'"
         },
         "Target": {
           "type": "array",
@@ -104,12 +117,17 @@
               "CheckCodeFormatting",
               "CleanSolution",
               "CompileSolution",
+              "CreateResourceGroup",
+              "Init",
               "Notify",
-              "RestoreDotNetTools",
               "RestoreSolution",
               "RunTests"
             ]
           }
+        },
+        "TenantId": {
+          "type": "string",
+          "default": "Secrets must be entered via 'nuke :secrets [profile]'"
         },
         "Verbosity": {
           "type": "string",
