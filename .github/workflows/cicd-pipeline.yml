@@ -13,6 +13,6 @@ jobs:
     uses: ./.github/workflows/ci-pipeline.yml
     with:
       environment: dev
-      apiKey: ${{ env.APIKEY }}
+      apiKey: ${{ APIKEY }}
     secrets:
       password: ${{ secrets.PASSWORD }}    
