@@ -55,6 +55,11 @@
           "type": "string",
           "description": "Partition to use on CI"
         },
+        "Password": {
+          "type": "string",
+          "description": "Password",
+          "default": "Secrets must be entered via 'nuke :secrets [profile]'"
+        },
         "Plan": {
           "type": "boolean",
           "description": "Shows the execution plan (HTML)"

@@ -17,6 +17,10 @@ internal class Build : NukeBuild
         ? Configuration.Debug
         : Configuration.Release;
 
+    [Parameter("Password")]
+    [Secret]
+    private readonly string Password;
+
     [Solution(GenerateProjects = true)]
     private readonly Solution Solution;
 
@@ -25,7 +29,11 @@ internal class Build : NukeBuild
             _.Description("Start")
                 .Executes(() =>
                 {
-                    Log.Information("{ApiKey} Starting pipeline", ApiKey);
+                    Log.Information(
+                        "Starting pipeline with {ApiKey} and {Password}",
+                        ApiKey,
+                        Password
+                    );
                 });
 
     private Target DotnetToolRestore =>
