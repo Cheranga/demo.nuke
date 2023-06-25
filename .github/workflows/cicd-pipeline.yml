@@ -1,0 +1,27 @@
+name: "demo-nuke-items-api"
+concurrency: demo-nuke-items-api
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - '*'
+
+jobs:
+  DEV:
+    name: DEV
+    uses: ./.github/workflows/ci-pipeline.yml    
+    with:
+      environment: dev   
+    secrets: 
+      password: ${{ secrets.PASSWORD }}
+      
+  TEST:
+    name: TEST
+    needs: 
+      - DEV
+    uses: ./.github/workflows/ci-pipeline.yml
+    with:
+      environment: test
+    secrets:
+      password: ${{ secrets.PASSWORD }}      

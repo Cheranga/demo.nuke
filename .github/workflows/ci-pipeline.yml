@@ -1,0 +1,32 @@
+name: ci-pipeline
+
+on:
+  workflow_call:
+    inputs:      
+      environment:
+        required: true
+        type: string       
+    secrets:
+      password:
+        required: true
+
+jobs:
+  ci:
+    name: ci
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.environment }}
+    steps:
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: |
+            7.0.x
+            
+      - name: Install Nuke
+        run: dotnet tool install Nuke.GlobalTool --global
+        
+      - name: Checkout
+        uses: actions/checkout@v3
+        
+      - name: Nuke
+        run: nuke --api-key "${{ vars.APIKEY }}" --password "${{ secrets.password }}" --target test      
