@@ -24,3 +24,7 @@ flowchart LR
     Restore --> Build
     Build --> Test
 ```
+
+## Todo
+
+- [ ] Include CSharpier Format Checks

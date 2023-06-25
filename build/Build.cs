@@ -2,13 +2,10 @@ using System.Linq;
 using Nuke.Common;
 using Nuke.Common.CI.GitHubActions;
 using Nuke.Common.ProjectModel;
+using Nuke.Common.Tooling;
 using Nuke.Common.Tools.DotNet;
 
-[GitHubActions(
-    "build",
-    GitHubActionsImage.UbuntuLatest,
-    OnPushBranches = new []{"master"}
-    )]
+[GitHubActions("build", GitHubActionsImage.UbuntuLatest, OnPushBranches = new[] { "master" })]
 class Build : NukeBuild
 {
     [Parameter("Configuration to build - Default is 'Debug' (local) or 'Release' (server)")]
@@ -19,10 +16,27 @@ class Build : NukeBuild
     [Solution(GenerateProjects = true)]
     readonly Solution Solution;
 
+    Target DotnetToolRestore =>
+        _ =>
+            _.Description("Restore DotNet Tools")
+                .Executes(() =>
+                {
+                    DotNetTasks.DotNetToolRestore(x => x.SetProcessWorkingDirectory(RootDirectory));
+                });
+
+    Target CodeFormatCheck =>
+        _ =>
+            _.Description("Check C# Code Formatting")
+                .DependsOn(DotnetToolRestore)
+                .Executes(() =>
+                {
+                    DotNetTasks.DotNet($"csharpier --check .");
+                });
+
     Target Clean =>
         _ =>
             _.Description("Clean Solution")
-                //.Before(Restore)
+                .DependsOn(CodeFormatCheck)
                 .Executes(() =>
                 {
                     DotNetTasks.DotNetClean(x => x.SetProject(Solution));
@@ -44,9 +58,10 @@ class Build : NukeBuild
                 .Executes(() =>
                 {
                     DotNetTasks.DotNetBuild(
-                        x => x.SetProjectFile(Solution)
-                            .EnableNoRestore()
-                            .SetConfiguration(Configuration)
+                        x =>
+                            x.SetProjectFile(Solution)
+                                .EnableNoRestore()
+                                .SetConfiguration(Configuration)
                     );
                 });
 
