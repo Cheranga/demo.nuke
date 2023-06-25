@@ -25,6 +25,19 @@ flowchart LR
     Build --> Test
 ```
 
+## Run Pipeline
+
+Run below command to run the pipeline using `NUKE`
+
+```shell
+nuke --configuration "Debug" --api-key "123456" --password "secret password" --target runtests
+```
+
 ## Todo
 
-- [ ] Include CSharpier Format Checks
+- [x] Include `CSharpier` Format Checks
+- [x] Running in Multiple GitHub Environments Using GHA
+  - [x] Env Specific Variable Support
+  - [x] Env Specific Secret Support
+- [x] Using Build Components
+- [ ] Publish to Azure
