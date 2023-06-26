@@ -15,13 +15,7 @@ jobs:
     name: ci
     runs-on: ubuntu-latest
     environment: ${{ inputs.environment }}
-    steps:
-#      - name: Setup .NET
-#        uses: actions/setup-dotnet@v3
-#        with:
-#          dotnet-version: |
-#            7.0.x
-            
+    steps:            
       - name: Install Nuke
         run: dotnet tool install Nuke.GlobalTool --global
         
