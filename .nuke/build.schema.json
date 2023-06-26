@@ -92,9 +92,8 @@
               "CheckCodeFormatting",
               "CleanSolution",
               "CompileSolution",
-              "CreateResourceGroup",
-              "Init",
               "Notify",
+              "ReadYml",
               "RestoreDotNetTools",
               "RestoreSolution",
               "RunTests"
@@ -118,9 +117,8 @@
               "CheckCodeFormatting",
               "CleanSolution",
               "CompileSolution",
-              "CreateResourceGroup",
-              "Init",
               "Notify",
+              "ReadYml",
               "RestoreDotNetTools",
               "RestoreSolution",
               "RunTests"
