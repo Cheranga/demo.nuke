@@ -8,7 +8,15 @@
       "properties": {
         "ApiKey": {
           "type": "string",
-          "description": "Api key"
+          "description": "Api Key"
+        },
+        "ClientId": {
+          "type": "string",
+          "default": "Secrets must be entered via 'nuke :secrets [profile]'"
+        },
+        "ClientSecret": {
+          "type": "string",
+          "default": "Secrets must be entered via 'nuke :secrets [profile]'"
         },
         "Configuration": {
           "type": "string",
@@ -57,7 +65,7 @@
         },
         "Password": {
           "type": "string",
-          "description": "Password",
+          "description": "Api Key",
           "default": "Secrets must be entered via 'nuke :secrets [profile]'"
         },
         "Plan": {
@@ -81,13 +89,15 @@
           "items": {
             "type": "string",
             "enum": [
-              "Clean",
-              "CodeFormatCheck",
-              "Compile",
-              "DotnetToolRestore",
+              "CheckCodeFormatting",
+              "CleanSolution",
+              "CompileSolution",
+              "CreateResourceGroup",
+              "Init",
               "Notify",
-              "Restore",
-              "Test"
+              "RestoreDotNetTools",
+              "RestoreSolution",
+              "RunTests"
             ]
           }
         },
@@ -95,21 +105,31 @@
           "type": "string",
           "description": "Path to a solution file that is automatically loaded"
         },
+        "SubscriptionId": {
+          "type": "string",
+          "default": "Secrets must be entered via 'nuke :secrets [profile]'"
+        },
         "Target": {
           "type": "array",
           "description": "List of targets to be invoked. Default is '{default_target}'",
           "items": {
             "type": "string",
             "enum": [
-              "Clean",
-              "CodeFormatCheck",
-              "Compile",
-              "DotnetToolRestore",
+              "CheckCodeFormatting",
+              "CleanSolution",
+              "CompileSolution",
+              "CreateResourceGroup",
+              "Init",
               "Notify",
-              "Restore",
-              "Test"
+              "RestoreDotNetTools",
+              "RestoreSolution",
+              "RunTests"
             ]
           }
+        },
+        "TenantId": {
+          "type": "string",
+          "default": "Secrets must be entered via 'nuke :secrets [profile]'"
         },
         "Verbosity": {
           "type": "string",
