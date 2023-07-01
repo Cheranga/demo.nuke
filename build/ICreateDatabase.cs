@@ -2,7 +2,6 @@
 using Nuke.Common.Tooling;
 using Nuke.Common.Tools.Docker;
 using Serilog;
-using Logger = Serilog.Core.Logger;
 
 public interface ICreateDatabase : INukeComponent
 {
@@ -16,21 +15,29 @@ public interface ICreateDatabase : INukeComponent
     Target CreateDatabase =>
         _ =>
             _.Description("Create Database")
-                .Requires(()=> SqlServerName, () => SqlServerPassword)
+                .Requires(() => SqlServerName, () => SqlServerPassword)
                 .Executes(() =>
                 {
-                    Log.Information("{ServerName} and {Password}", SqlServerName, SqlServerPassword);
-                    
+                    Log.Information(
+                        "{ServerName} and {Password}",
+                        SqlServerName,
+                        SqlServerPassword
+                    );
+
                     DockerTasks.DockerRun(
                         settings =>
                             settings
                                 .SetImage("mcr.microsoft.com/mssql/server:2019-latest")
                                 .SetName(SqlServerName)
-                                .SetProcessEnvironmentVariable("ACCEPT_EULA", "Y")
-                                .SetProcessEnvironmentVariable("SA_PASSWORD", SqlServerPassword)
+                                .SetEnv(
+                                    "ACCEPT_EULA=Y",
+                                    $"SA_PASSWORD={SqlServerPassword}",
+                                    "MSSQL_PID=Standard"
+                                )
                                 .SetPublish("1433:1433")
                                 .EnableDetach()
-                                .SetVolume("./Data:/var/opt/mssql")
+                                .EnableRm()
+                                .SetVolume("./data:/var/opt/mssql")
                     );
                 });
 }

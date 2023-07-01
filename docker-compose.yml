@@ -2,11 +2,12 @@ version: '3.8'
 services:
   sqlserver:
     image: mcr.microsoft.com/mssql/server:2019-latest
-    container_name: sqlserver
+    container_name: demosqlserver
     environment:
       - ACCEPT_EULA=Y
-      - SA_PASSWORD=Password123!!@
+      - SA_PASSWORD=ffADFfcfgfg$5#@%%#@@#dfgdf!
+      - MSSQL_PID=Standard
     ports:
       - 1433:1433
     volumes:
-      - ./Data:/var/opt/mssql
+      - ./data:/var/opt/mssql

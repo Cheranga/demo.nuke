@@ -7,8 +7,11 @@ using DefaultNamespace;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Nuke.Common;
+using Nuke.Common.CI.GitHubActions;
+using Nuke.Common.Git;
 using Nuke.Common.Tooling;
 using Nuke.Utilities.Text.Yaml;
+using Serilog;
 
 public class Person
 {
@@ -24,6 +27,7 @@ public class Address
     public string Country { get; set; }
 }
 
+[GitHubActions("blah")]
 internal class Build
     : NukeBuild,
         ICheckCodeFormatting,
@@ -41,6 +45,8 @@ internal class Build
     /// - Microsoft VisualStudio     https://nuke.build/visualstudio
     /// - Microsoft VSCode           https://nuke.build/vscode
 
+    [GitRepository] private GitRepository Repository;
+    
     [Parameter]
     [Secret]
     private string ClientId;
@@ -56,6 +62,14 @@ internal class Build
     [Parameter]
     [Secret]
     private string SubscriptionId;
+
+    private Target SetupDatabase => _ => _.Description("Setup Database")
+        .DependsOn<ICreateDatabase>()
+        .Executes(() =>
+        {
+            
+            Log.Information("Database created");
+        });
 
     Target ReadYml =>
         _ =>

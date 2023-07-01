@@ -97,7 +97,8 @@
               "ReadYml",
               "RestoreDotNetTools",
               "RestoreSolution",
-              "RunTests"
+              "RunTests",
+              "SetupDatabase"
             ]
           }
         },
@@ -132,7 +133,8 @@
               "ReadYml",
               "RestoreDotNetTools",
               "RestoreSolution",
-              "RunTests"
+              "RunTests",
+              "SetupDatabase"
             ]
           }
         },
