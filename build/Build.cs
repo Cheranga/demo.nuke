@@ -1,3 +1,4 @@
+using System.Linq;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
@@ -7,7 +8,12 @@ using DefaultNamespace;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Nuke.Common;
+using Nuke.Common.CI.GitHubActions;
+using Nuke.Common.CI.GitHubActions.Configuration;
 using Nuke.Common.Tooling;
+using Nuke.Common.Tools.Git;
+using Nuke.Common.Tools.GitHub;
+using Nuke.Common.Utilities.Collections;
 using Nuke.Utilities.Text.Yaml;
 
 public class Person
@@ -24,6 +30,7 @@ public class Address
     public string Country { get; set; }
 }
 
+[GitHubActions("blah", GitHubActionsImage.UbuntuLatest)]
 internal class Build
     : NukeBuild,
         ICheckCodeFormatting,
@@ -56,11 +63,48 @@ internal class Build
     [Secret]
     private string SubscriptionId;
 
+    private Target CreateGitHubWorkFlow => _ => _.Description("Create GitHub Actions")
+        .Executes(() =>
+        {
+            new GitHubActionsConfiguration
+            {
+                Name = "some-workflow",
+                ShortTriggers = new [] {GitHubActionsTrigger.Push, GitHubActionsTrigger.WorkflowDispatch},
+                Jobs = new []
+                {
+                    new GitHubActionsJob
+                    {
+                        Name = "ci",
+                        Image = GitHubActionsImage.UbuntuLatest,
+                        Steps = new GitHubActionsStep[]
+                        {
+                            new GitHubActionsCheckoutStep()
+                        }
+                    }
+                }
+            }
+            var githubAction = new GitHubActionsJob
+            {
+                Name = "some-workflow",
+                Image = GitHubActionsImage.UbuntuLatest,
+                ConcurrencyGroup = nameof(Build),
+                Steps = new GitHubActionsStep[]
+                {
+                    new GitHubActionsCheckoutStep()
+                }
+            };
+
+
+            var path = RootDirectory / ".github" / "workflows" / "demo.yml";
+            path.WriteYaml(githubAction);
+        });
+
     Target ReadYml =>
         _ =>
             _.Description("Read Yml")
                 .Executes(() =>
                 {
+                    
                     //
                     // Read and verify YML
                     //
