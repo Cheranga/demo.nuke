@@ -12,7 +12,11 @@ public interface IRunTests : INukeComponent
                 .Triggers<INotifyTeam>()
                 .Executes(() =>
                 {
-                    Log.Information("{ApiKey} and {Password}", EnvironmentInfo.GetVariable("APIKEY"), EnvironmentInfo.GetVariable("PASSWORD"));
+                    Log.Information(
+                        "{ApiKey} and {Password}",
+                        EnvironmentInfo.GetVariable("APIKEY"),
+                        EnvironmentInfo.GetVariable("PASSWORD")
+                    );
                     Solution.AllProjects
                         .Where(x => x.Name.EndsWith("Tests"))
                         .ToList()
