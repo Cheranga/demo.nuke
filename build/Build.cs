@@ -32,7 +32,8 @@ internal class Build
         IRestoreSolution,
         ICompileSolution,
         IRunTests,
-        INotifyTeam
+        INotifyTeam,
+        ICreateDatabase
 {
     /// Support plugins are available for:
     /// - JetBrains ReSharper        https://nuke.build/resharper

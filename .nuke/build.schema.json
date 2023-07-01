@@ -92,6 +92,7 @@
               "CheckCodeFormatting",
               "CleanSolution",
               "CompileSolution",
+              "CreateDatabase",
               "Notify",
               "ReadYml",
               "RestoreDotNetTools",
@@ -103,6 +104,15 @@
         "Solution": {
           "type": "string",
           "description": "Path to a solution file that is automatically loaded"
+        },
+        "SqlServerName": {
+          "type": "string",
+          "description": "SQL Server Name"
+        },
+        "SqlServerPassword": {
+          "type": "string",
+          "description": "Password",
+          "default": "Secrets must be entered via 'nuke :secrets [profile]'"
         },
         "SubscriptionId": {
           "type": "string",
@@ -117,6 +127,7 @@
               "CheckCodeFormatting",
               "CleanSolution",
               "CompileSolution",
+              "CreateDatabase",
               "Notify",
               "ReadYml",
               "RestoreDotNetTools",
