@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using Nuke.Common;
 using Nuke.Common.Tools.DotNet;
@@ -12,11 +13,15 @@ public interface IRunTests : INukeComponent
                 .Triggers<INotifyTeam>()
                 .Executes(() =>
                 {
-                    Log.Information(
-                        "{ApiKey} and {Password}",
-                        EnvironmentInfo.GetVariable("APIKEY"),
-                        EnvironmentInfo.GetVariable("PASSWORD")
-                    );
+                    var envVariables =
+                        EnvironmentInfo.Variables?.ToList()
+                        ?? new List<KeyValuePair<string, string>>();
+
+                    foreach (var keyValuePair in envVariables)
+                    {
+                        Log.Information("{Key} = {Value}", keyValuePair.Key, keyValuePair.Value);
+                    }
+
                     Solution.AllProjects
                         .Where(x => x.Name.EndsWith("Tests"))
                         .ToList()
