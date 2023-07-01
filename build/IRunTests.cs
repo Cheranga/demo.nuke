@@ -1,6 +1,7 @@
 using System.Linq;
 using Nuke.Common;
 using Nuke.Common.Tools.DotNet;
+using Serilog;
 
 public interface IRunTests : INukeComponent
 {
@@ -11,6 +12,7 @@ public interface IRunTests : INukeComponent
                 .Triggers<INotifyTeam>()
                 .Executes(() =>
                 {
+                    Log.Information("{ApiKey} and {Password}", EnvironmentInfo.GetVariable("APIKEY"), EnvironmentInfo.GetVariable("PASSWORD"));
                     Solution.AllProjects
                         .Where(x => x.Name.EndsWith("Tests"))
                         .ToList()
