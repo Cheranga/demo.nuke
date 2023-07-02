@@ -1,4 +1,5 @@
-﻿using Nuke.Common;
+﻿using System.IO;
+using Nuke.Common;
 using Nuke.Common.Tooling;
 using Nuke.Common.Tools.Docker;
 using Serilog;
@@ -29,15 +30,13 @@ public interface ICreateDatabase : INukeComponent
                             settings
                                 .SetImage("mcr.microsoft.com/mssql/server:2019-latest")
                                 .SetName(SqlServerName)
-                                .SetEnv(
-                                    "ACCEPT_EULA=Y",
-                                    $"SA_PASSWORD={SqlServerPassword}",
-                                    "MSSQL_PID=Standard"
-                                )
+                                .AddEnv("ACCEPT_EULA=Y")
+                                .AddEnv($"MSSQL_SA_PASSWORD={SqlServerPassword}")
+                                .AddEnv("MSSQL_PID=Standard")
                                 .SetPublish("1433:1433")
                                 .EnableDetach()
                                 .EnableRm()
-                                .SetVolume("./data:/var/opt/mssql")
+                                .SetVolume("./itemdata:/var/opt/mssql")
                     );
                 });
 }

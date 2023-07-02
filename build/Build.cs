@@ -27,7 +27,6 @@ public class Address
     public string Country { get; set; }
 }
 
-[GitHubActions("blah")]
 internal class Build
     : NukeBuild,
         ICheckCodeFormatting,
