@@ -36,7 +36,7 @@ public interface ICreateDatabase : INukeComponent
                                 .SetPublish("1433:1433")
                                 .EnableDetach()
                                 .EnableRm()
-                                .SetVolume("./itemdata:/var/opt/mssql")
+                                .SetVolume("./Data:/var/opt/mssql")
                     );
                 });
 }
